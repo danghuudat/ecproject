@@ -21,7 +21,8 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 Route::get('/getlogin', [\App\Http\Controllers\UserController::class, 'getlogin'])->name('getlogin');
-Route::post('store', [\App\Http\Controllers\UserController::class, 'store'])->middleware('auth');
+Route::get('user', [\App\Http\Controllers\UserController::class, 'index'])->middleware('auth');
+Route::post('user/store', [\App\Http\Controllers\UserController::class, 'store'])->middleware('auth');
 
 
 
