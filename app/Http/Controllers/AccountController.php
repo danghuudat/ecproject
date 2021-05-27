@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use Illuminate\Http\Request;
+use App\Imports\AccountsImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class AccountController extends Controller
 {
@@ -14,7 +17,11 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+        $data = Account::query()
+            ->with(['previous', 'newbu', 'forecast_bu', 'source','technology','job_range','status'])
+            ->get();
+        return response($data);
+
     }
 
     /**
@@ -81,5 +88,12 @@ class AccountController extends Controller
     public function destroy(Account $account)
     {
         //
+    }
+
+    public function import()
+    {
+        Excel::import(new AccountsImport, storage_path('..\app\Imports/xlsx\account.xlsx'));
+
+        return redirect('/')->with('success', 'All good!');
     }
 }

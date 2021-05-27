@@ -15,20 +15,20 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('fullname');
-            $table->string('account');
-            $table->integer('previous');
-            $table->integer('newbu');
-            $table->integer('technology');
-            $table->integer('job_range');
-            $table->string('language');
-            $table->date('ob_day');
-            $table->date('transfer_day');
-            $table->integer('source');
-            $table->integer('status');
-            $table->string('forecast_customer_code');
-            $table->integer('forecast_bu');
-            $table->string('note');
+            $table->string('fullname')->nullable();;
+            $table->string('account')->nullable();
+            $table->integer('previous')->nullable();;
+            $table->integer('newbu')->nullable();;
+            $table->integer('technology')->nullable();;
+            $table->integer('job_range')->nullable();;
+            $table->string('language')->nullable();;
+            $table->date('ob_day')->nullable();;
+            $table->date('transfer_day')->nullable();;
+            $table->integer('source')->nullable();;
+            $table->integer('status')->nullable();;
+            $table->string('forecast_customer_code')->nullable();;
+            $table->integer('forecast_bu')->nullable();;
+            $table->longText('note')->nullable();;
             $table->softDeletes ();
             $table->timestamps();
         });
