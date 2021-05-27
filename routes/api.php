@@ -35,8 +35,51 @@ Route::group([
     Route::post('me', [\App\Http\Controllers\AuthController::class, 'me']);
 });
 Route::group([
+//    'middleware' => 'api',
     'prefix' => 'account'
 ], function ($router) {
     Route::get('/import', [\App\Http\Controllers\AccountController::class, 'import']);
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index']);
+    Route::get('/genchart', [\App\Http\Controllers\AccountController::class, 'genchart']);
+    Route::delete('/delete/{id}', [\App\Http\Controllers\AccountController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'department'
+], function ($router) {
+    Route::get('/', [\App\Http\Controllers\DepartmentController::class, 'index']);
+    Route::delete('/delete/{id}', [\App\Http\Controllers\DepartmentController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'technology'
+], function ($router) {
+    Route::get('/', [\App\Http\Controllers\TechnologyController::class, 'index']);
+    Route::delete('/delete/{id}', [\App\Http\Controllers\TechnologyController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'source'
+], function ($router) {
+    Route::get('/', [\App\Http\Controllers\SourceController::class, 'index']);
+    Route::delete('/delete/{id}', [\App\Http\Controllers\SourceController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'jobrank'
+], function ($router) {
+    Route::get('/', [\App\Http\Controllers\JobRangeController::class, 'index']);
+    Route::delete('/delete/{id}', [\App\Http\Controllers\JobRangeController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'status'
+], function ($router) {
+    Route::get('/', [\App\Http\Controllers\StatusController::class, 'index']);
+    Route::delete('/delete/{id}', [\App\Http\Controllers\StatusController::class, 'destroy']);
 });

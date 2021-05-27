@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\jobRange;
 use Illuminate\Http\Request;
 
@@ -12,20 +13,29 @@ class JobRangeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function destroy($id)
     {
-        //
+        $data = jobRange::find($id);
+        $result = $data ->delete();
+        if($result){
+            return ["result"=>"record has been delete"];
+        }
+        else{
+            return ["result"=>"failed"];
+        }
     }
 
+
+    public function index()
+    {
+        $data = jobRange::all();
+        return response($data);
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,10 +43,6 @@ class JobRangeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -44,10 +50,6 @@ class JobRangeController extends Controller
      * @param  \App\Models\jobRange  $jobRange
      * @return \Illuminate\Http\Response
      */
-    public function show(jobRange $jobRange)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -55,10 +57,6 @@ class JobRangeController extends Controller
      * @param  \App\Models\jobRange  $jobRange
      * @return \Illuminate\Http\Response
      */
-    public function edit(jobRange $jobRange)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,10 +65,6 @@ class JobRangeController extends Controller
      * @param  \App\Models\jobRange  $jobRange
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, jobRange $jobRange)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +72,5 @@ class JobRangeController extends Controller
      * @param  \App\Models\jobRange  $jobRange
      * @return \Illuminate\Http\Response
      */
-    public function destroy(jobRange $jobRange)
-    {
-        //
-    }
+
 }

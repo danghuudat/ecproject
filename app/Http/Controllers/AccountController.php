@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Imports\AccountsImport;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -85,9 +86,16 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Account $account)
+    public function destroy($id)
     {
-        //
+        $data = Account::find($id);
+        $result = $data ->delete();
+        if($result){
+            return ["result"=>"record has been delete"];
+        }
+        else{
+            return ["result"=>"failed"];
+        }
     }
 
     public function import()
@@ -95,5 +103,14 @@ class AccountController extends Controller
         Excel::import(new AccountsImport, storage_path('..\app\Imports/xlsx\account.xlsx'));
 
         return redirect('/')->with('success', 'All good!');
+    }
+
+    public function genchart(){
+        $data = Account::select("technologies.name as technology", DB::raw('count(*) as total'))
+            ->join('technologies','technologies.id','=','accounts.technology')
+            ->groupBy('technology')
+
+            ->get();
+        return response($data);
     }
 }
