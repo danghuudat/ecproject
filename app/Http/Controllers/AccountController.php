@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\technology;
 use Illuminate\Http\Request;
 use App\Imports\AccountsImport;
 use Illuminate\Support\Facades\DB;
@@ -106,11 +107,12 @@ class AccountController extends Controller
     }
 
     public function genchart(){
-        $data = Account::select("technologies.name as technology", DB::raw('count(*) as total'))
-            ->join('technologies','technologies.id','=','accounts.technology')
+        /*$data = Account::select("technologies.name as technology", DB::raw('count(*) as total'))
             ->groupBy('technology')
-
+            ->with('technology')
+            ->get();*/
+        $datas = technology::withCount('accounts')
             ->get();
-        return response($data);
+        return response($datas);
     }
 }

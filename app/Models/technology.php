@@ -10,4 +10,9 @@ class technology extends Model
     use HasFactory;
     protected $table = 'technologies';
 
+
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
 }

@@ -30,31 +30,31 @@ class Account extends Model
 
     public function previous()
     {
-        return $this->belongsTo(Department::class, 'previous', 'id');
+        return $this->belongsTo(Department::class, 'previous_id', 'id');
     }
 
     public function newbu()
     {
-        return $this->belongsTo(Department::class, 'newbu', 'id');
+        return $this->belongsTo(Department::class, 'newbu_id', 'id');
     }
     public function forecast_bu()
     {
-        return $this->belongsTo(Department::class, 'newbu', 'id');
+        return $this->belongsTo(Department::class, 'forecast_bu_id', 'id');
     }
     public function source()
     {
-        return $this->belongsTo(Source::class, 'source', 'id');
+        return $this->belongsTo(Source::class, 'source_id', 'id');
     }
     public function technology()
     {
-        return $this->belongsTo(technology::class, 'technology', 'id');
+        return $this->belongsTo(technology::class, 'technology_id', 'id');
     }
     public function job_range()
     {
-        return $this->belongsTo(jobRange::class, 'job_range', 'id');
+        return $this->belongsTo(jobRange::class, 'job_range_id', 'id');
     }
     public function status()
     {
-        return $this->belongsTo(Status::class, 'status', 'id');
+        return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 }

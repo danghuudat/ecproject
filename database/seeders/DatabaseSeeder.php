@@ -17,5 +17,11 @@ class DatabaseSeeder extends Seeder
         User::factory()
             ->count(50)
             ->create();
+        $this->call([
+            DepartmentSeeder::class,
+            JobRankSeeder::class,
+            StatusSeeder::class,
+            TechonologySeeder::class,
+        ]);
     }
 }

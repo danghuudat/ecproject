@@ -28,21 +28,21 @@ class AccountsImport implements ToModel
         $source = Source::where('name','=',$row[5])->select('id')->first();
         $forecast_bu = ($row[13]==null)?"":Department::where('name','=',$row[13])->select('id')->first();
         $status = ($row[11]==null)?"":Department::where('name','=',$row[11])->select('id')->first();
-        /*\Log::info($obdate);*/
+        \Log::info($previous->id);
         return new Account([
             'fullname'     => $row[1],
             'account'    => $row[2],
-            'previous'    => ($previous!=null)?$previous->id:null,
-            'newbu'    => ($newbu!=null)?$newbu->id:null,
-            'technology'    => ($technology!=null)?$technology->id:null,
-            'job_range'    => ($jobrank!=null)?$jobrank->id:null,
+            'previous_id'    => ($previous!=null)?$previous->id:null,
+            'newbu_id'    => ($newbu!=null)?$newbu->id:null,
+            'technology_id'    => ($technology!=null)?$technology->id:null,
+            'job_range_id'    => ($jobrank!=null)?$jobrank->id:null,
             'language'    => $row[7],
             'ob_day'    => $obdate,
             'transfer_day'    => $transferDay,
-            'source'    => ($source!=null)?$source->id:null,
-            'status'    =>  ($status!=null)?$status->id:null,
+            'source_id'    => ($source!=null)?$source->id:null,
+            'status_id'    =>  ($status!=null)?$status->id:null,
             'forecast_customer_code'    => $row[12],
-            'forecast_bu'    => ($forecast_bu!=null)?$forecast_bu->id:null,
+            'forecast_bu_id'    => ($forecast_bu!=null)?$forecast_bu->id:null,
             'note'    => $row[14],
         ]);
     }
