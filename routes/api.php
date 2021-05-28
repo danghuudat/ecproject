@@ -72,8 +72,8 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'jobrank'
 ], function ($router) {
-    Route::get('/', [\App\Http\Controllers\JobRangeController::class, 'index']);
-    Route::delete('/delete/{id}', [\App\Http\Controllers\JobRangeController::class, 'destroy']);
+    Route::get('/', [\App\Http\Controllers\JobRankController::class, 'index']);
+    Route::delete('/delete/{id}', [\App\Http\Controllers\JobRankController::class, 'destroy']);
 });
 
 Route::group([

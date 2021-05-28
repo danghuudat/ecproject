@@ -4,7 +4,7 @@ namespace App\Imports;
 
 use App\Models\Account;
 use App\Models\Department;
-use App\Models\jobRange;
+use App\Models\JobRank;
 use App\Models\Source;
 use App\Models\technology;
 use Carbon\Carbon;
@@ -22,14 +22,13 @@ class AccountsImport implements ToModel
         $previous = Department::where('name','=',$row[3])->select('id')->first();
         $newbu = ($row[4]==null)?"":Department::where('name','=',$row[4])->select('id')->first();
         $technology = technology::where('name','=',$row[5])->select('id')->first();
-        $jobrank = jobRange::where('name','=',$row[6])->select('id')->first();
+        $jobrank = JobRank::where('name','=',$row[6])->select('id')->first();
         $obdate =($row[8]==null)?null:Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[8]));
         $transferDay =($row[9]==null)?null:Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]));
         $source = Source::where('name','=',$row[5])->select('id')->first();
         $forecast_bu = ($row[13]==null)?"":Department::where('name','=',$row[13])->select('id')->first();
         $status = ($row[11]==null)?"":Department::where('name','=',$row[11])->select('id')->first();
-        \Log::info($previous->id);
-        return new Account([
+        $account = new Account([
             'fullname'     => $row[1],
             'account'    => $row[2],
             'previous_id'    => ($previous!=null)?$previous->id:null,
@@ -45,5 +44,8 @@ class AccountsImport implements ToModel
             'forecast_bu_id'    => ($forecast_bu!=null)?$forecast_bu->id:null,
             'note'    => $row[14],
         ]);
+        \Log::info($account);
+        $account->save();
+        return $account;
     }
 }

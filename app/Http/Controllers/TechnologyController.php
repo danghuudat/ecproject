@@ -10,7 +10,7 @@ class TechnologyController extends Controller
 {
     public function destroy($id)
     {
-        $data = technology::find($id);
+        $data = Technology::find($id);
         $result = $data ->delete();
         if($result){
             return ["result"=>"record has been delete"];
@@ -23,7 +23,7 @@ class TechnologyController extends Controller
 
     public function index()
     {
-        $data = technology::all();
+        $data = Technology::all();
         return response($data);
     }
 }

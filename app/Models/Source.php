@@ -9,5 +9,8 @@ class Source extends Model
 {
     use HasFactory;
     protected $table = 'sources';
-
+    protected $fillable = [
+        'id',
+        'name',
+    ];
 }

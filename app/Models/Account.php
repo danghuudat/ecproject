@@ -14,17 +14,17 @@ class Account extends Model
     protected $fillable = [
         'fullname',
         'account',
-        'previous',
-        'newbu',
-        'technology',
-        'job_range',
+        'previous_id',
+        'newbu_id',
+        'technology_id',
+        'job_range_id',
         'language',
         'ob_day',
         'transfer_day',
-        'source',
-        'status',
+        'source_id',
+        'status_id',
         'forecast_customer_code',
-        'forecast_bu',
+        'forecast_bu_id',
         'note',
     ];
 
@@ -51,7 +51,7 @@ class Account extends Model
     }
     public function job_range()
     {
-        return $this->belongsTo(jobRange::class, 'job_range_id', 'id');
+        return $this->belongsTo(JobRank::class, 'job_range_id', 'id');
     }
     public function status()
     {

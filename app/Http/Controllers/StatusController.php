@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\jobRange;
+use App\Models\JobRank;
 use App\Models\Status;
 use Illuminate\Http\Request;
 
