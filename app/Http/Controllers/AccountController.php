@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AccountsExport;
 use App\Models\Account;
 use App\Models\technology;
 use Illuminate\Http\Request;
@@ -20,10 +21,9 @@ class AccountController extends Controller
     public function index()
     {
         $data = Account::query()
-            ->with(['previous', 'newbu', 'forecast_bu', 'source','technology','job_range','status'])
+            ->with(['previous', 'newbu', 'forecast_bu', 'source', 'technology', 'job_range', 'status'])
             ->get();
         return response($data);
-
     }
 
     /**
@@ -90,12 +90,11 @@ class AccountController extends Controller
     public function destroy($id)
     {
         $data = Account::find($id);
-        $result = $data ->delete();
-        if($result){
-            return ["result"=>"record has been delete"];
-        }
-        else{
-            return ["result"=>"failed"];
+        $result = $data->delete();
+        if ($result) {
+            return ["result" => "record has been delete"];
+        } else {
+            return ["result" => "failed"];
         }
     }
 
@@ -106,7 +105,8 @@ class AccountController extends Controller
         return redirect('/')->with('success', 'All good!');
     }
 
-    public function genchart(){
+    public function genchart()
+    {
         /*$data = Account::select("technologies.name as technology", DB::raw('count(*) as total'))
             ->groupBy('technology')
             ->with('technology')
@@ -114,5 +114,10 @@ class AccountController extends Controller
         $datas = technology::withCount('accounts')
             ->get();
         return response($datas);
+    }
+
+    public function export()
+    {
+        return Excel::download(new AccountsExport, 'accounts.xlsx',);
     }
 }

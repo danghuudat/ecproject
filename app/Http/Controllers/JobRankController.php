@@ -16,12 +16,11 @@ class JobRankController extends Controller
     public function destroy($id)
     {
         $data = JobRank::find($id);
-        $result = $data ->delete();
-        if($result){
-            return ["result"=>"record has been delete"];
-        }
-        else{
-            return ["result"=>"failed"];
+        $result = $data->delete();
+        if ($result) {
+            return ["result" => "record has been delete"];
+        } else {
+            return ["result" => "failed"];
         }
     }
 
@@ -72,5 +71,4 @@ class JobRankController extends Controller
      * @param  \App\Models\JobRank  $jobRange
      * @return \Illuminate\Http\Response
      */
-
 }

@@ -11,12 +11,11 @@ class StatusController extends Controller
     public function destroy($id)
     {
         $data = Status::find($id);
-        $result = $data ->delete();
-        if($result){
-            return ["result"=>"record has been delete"];
-        }
-        else{
-            return ["result"=>"failed"];
+        $result = $data->delete();
+        if ($result) {
+            return ["result" => "record has been delete"];
+        } else {
+            return ["result" => "failed"];
         }
     }
 
