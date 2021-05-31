@@ -16,39 +16,14 @@ class AccountsExport implements FromCollection, WithHeadings
     {
         $accounts = Account::with(['previous', 'newbu', 'forecast_bu', 'source', 'technology', 'job_range', 'status'])
             ->get();
+        $datas = ['previous', 'newbu', 'forecast_bu', 'source', 'technology', 'job_range', 'status'];
         foreach ($accounts as $account) {
-            $previous_name = $account->previous->name;
-            $account->previous_id = $previous_name;
-            unset($account->previous);
-            if ($account->newbu != null) {
-                $newbu_name = $account->newbu->name;
-                $account->newbu_id = $newbu_name;
-                unset($account->newbu);
-            }
-            if ($account->forecast_bu != null) {
-                $forecast_bu_name = $account->forecast_bu->name;
-                $account->forecast_bu_id = $forecast_bu_name;
-                unset($account->forecast_bu);
-            }
-            if ($account->source != null) {
-                $source_name = $account->source->name;
-                $account->source_id = $source_name;
-                unset($account->source);
-            }
-            if ($account->technology != null) {
-                $technology_name = $account->technology->name;
-                $account->technology_id = $technology_name;
-                unset($account->technology);
-            }
-            if ($account->job_range != null) {
-                $job_range_name = $account->job_range->name;
-                $account->job_range_id = $job_range_name;
-                unset($account->job_range);
-            }
-            if ($account->status != null) {
-                $status_name = $account->status->name;
-                $account->status_id = $status_name;
-                unset($account->status);
+            for($i = 0; $i< count($datas); $i++){
+                if ($account->{"$datas[$i]"} != null) {
+                    ${"$datas[$i]_name"} = $account->{"$datas[$i]"}->name;
+                    $account-> {"$datas[$i]_id"} =  ${"$datas[$i]_name"};
+                    unset($account->{"$datas[$i]"});
+                }
             }
         }
         return $accounts;
