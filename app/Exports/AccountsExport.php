@@ -15,7 +15,7 @@ class AccountsExport implements FromCollection, WithHeadings
     public function collection()
     {
         $accounts = Account::with(['previous', 'newbu', 'forecast_bu', 'source', 'technology', 'job_range', 'status'])
-            ->get();
+            ->paginate(15);
         $datas = ['previous', 'newbu', 'forecast_bu', 'source', 'technology', 'job_range', 'status'];
         foreach ($accounts as $account) {
             for($i = 0; $i< count($datas); $i++){
@@ -47,9 +47,6 @@ class AccountsExport implements FromCollection, WithHeadings
             'Forecast Customer Code',
             'Forecast BU',
             'Note',
-            'deleted_at',
-            'created_at',
-            'updated_at',
         ];
     }
 }

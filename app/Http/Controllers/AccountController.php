@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\AccountsExport;
 use App\Models\Account;
+use App\Models\Status;
 use App\Models\technology;
 use Illuminate\Http\Request;
 use App\Imports\AccountsImport;
@@ -107,12 +108,12 @@ class AccountController extends Controller
 
     public function genchart()
     {
-        /*$data = Account::select("technologies.name as technology", DB::raw('count(*) as total'))
-            ->groupBy('technology')
-            ->with('technology')
-            ->get();*/
-        $datas = technology::withCount('accounts')
-            ->get();
+        $technology = Technology::withCount('accounts')->get();
+        $status = Status::withCount('accounts')->get();
+        $datas = new \stdClass();
+        $datas->technology = $technology;
+        $datas->status = $status;
+        $datas = json_decode( json_encode($datas), true);
         return response($datas);
     }
 

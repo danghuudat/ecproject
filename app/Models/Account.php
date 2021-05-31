@@ -28,6 +28,9 @@ class Account extends Model
         'note',
     ];
 
+    protected $hidden = ["created_at", "updated_at", "deleted_at"];
+
+
     public function previous()
     {
         return $this->belongsTo(Department::class, 'previous_id', 'id');
