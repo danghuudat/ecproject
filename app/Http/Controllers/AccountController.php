@@ -102,18 +102,28 @@ class AccountController extends Controller
     public function import()
     {
         Excel::import(new AccountsImport, storage_path('..\app\Imports/xlsx\account.xlsx'));
-
         return redirect('/')->with('success', 'All good!');
     }
 
     public function genchart()
     {
-        $technology = Technology::withCount('accounts')->get();
-        $status = Status::withCount('accounts')->get();
-        $datas = new \stdClass();
-        $datas->technology = $technology;
-        $datas->status = $status;
-        $datas = json_decode( json_encode($datas), true);
+        $datas = Account::groupBy('status_id','technology_id')
+            ->select('technology_id', 'status_id', DB::raw('count(id) as number_member'))
+            ->orderBy('status_id')
+            ->with('status')
+            ->with('technology')
+            ->get();
+        return response($datas);
+    }
+
+    public function genchartNewbu(){
+        $datas = Account::groupBy('newbu_id','technology_id')
+            ->select('technology_id', 'newbu_id', DB::raw('count(id) as number_member'))
+            ->whereNotNull('newbu_id')
+            ->orderBy('technology_id')
+            ->with('technology')
+            ->with('newbu')
+            ->get();
         return response($datas);
     }
 

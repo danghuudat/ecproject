@@ -41,6 +41,7 @@ Route::group([
     Route::get('/import', [\App\Http\Controllers\AccountController::class, 'import']);
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index']);
     Route::get('/genchart', [\App\Http\Controllers\AccountController::class, 'genchart']);
+    Route::get('/genchartnewbu', [\App\Http\Controllers\AccountController::class, 'genchartNewbu']);
     Route::delete('/delete/{id}', [\App\Http\Controllers\AccountController::class, 'destroy']);
     Route::get('/export/', [\App\Http\Controllers\AccountController::class, 'export']);
 
