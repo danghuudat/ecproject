@@ -29,6 +29,7 @@ class AccountsImport implements ToModel
         $source = Source::where('name', '=', $row[10])->select('id')->first();
         $forecast_bu = ($row[13] == null) ? "" : Department::where('name', '=', $row[13])->select('id')->first();
         $status = ($row[11] == null) ? "" : Status::where('name', '=', $row[11])->select('id')->first();
+        $phone_number = ($row[15]&&$row[15]!=null)?$row[15]:"";
         $account = new Account([
             'fullname'     => $row[1],
             'account'    => $row[2],
@@ -44,6 +45,7 @@ class AccountsImport implements ToModel
             'forecast_customer_code'    => $row[12],
             'forecast_bu_id'    => ($forecast_bu != null) ? $forecast_bu->id : null,
             'note'    => $row[14],
+            'phone_number'    => $phone_number,
         ]);
         $account->save();
         return $account;

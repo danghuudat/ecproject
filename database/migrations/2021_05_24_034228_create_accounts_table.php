@@ -17,6 +17,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->string('fullname')->nullable();;
             $table->string('account')->nullable();
+            $table->string('phone_number')->nullable();
             $table->integer('previous_id')->nullable();;
             $table->integer('newbu_id')->nullable();;
             $table->integer('technology_id')->nullable();;

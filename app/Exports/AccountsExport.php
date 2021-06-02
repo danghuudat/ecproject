@@ -35,6 +35,7 @@ class AccountsExport implements FromCollection, WithHeadings
             'id',
             'Full name',
             'Account',
+            'Phone number',
             'Previous',
             'Newbu',
             'Technology',
