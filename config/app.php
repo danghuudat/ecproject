@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         "Tymon\JWTAuth\Providers\LaravelServiceProvider",
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        \App\Providers\RepositoryServiceProvider::class,
+
 
 
 

@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Department;
+use App\Repositories\Department\Contracts\DepartmentInterface;
+use App\Repositories\Department\Eloquent\DepartmentRepository;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    public $departmentReponsitory;
+    public function __construct(DepartmentInterface $departmentReponsitory)
+    {
+        $this->departmentReponsitory = $departmentReponsitory;
+    }
+
     public function destroy($id)
     {
         $data = Department::find($id);
@@ -22,7 +30,7 @@ class DepartmentController extends Controller
 
     public function index()
     {
-        $data = Department::all();
+        $data = $this->departmentReponsitory->index();
         return response($data);
     }
 }
