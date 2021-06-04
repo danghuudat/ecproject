@@ -30,7 +30,6 @@ class UserFactory extends Factory
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
         ];
-
     }
 
     /**

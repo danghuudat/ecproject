@@ -35,7 +35,7 @@ Route::group([
     Route::post('me', [\App\Http\Controllers\AuthController::class, 'me']);
 });
 Route::group([
-//    'middleware' => 'api',
+    'middleware' => 'auth',
     'prefix' => 'account'
 ], function ($router) {
     Route::get('/import', [\App\Http\Controllers\AccountController::class, 'import']);

@@ -6,7 +6,6 @@ use App\Models\Department;
 use App\Repositories\Department\Contracts\DepartmentInterface;
 use Illuminate\Database\Eloquent\Model;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-//use Your Model
 
 /**
  * Class DepartmentRepository.

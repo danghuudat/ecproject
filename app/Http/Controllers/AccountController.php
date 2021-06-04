@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exports\AccountsExport;
 use App\Models\Account;
-use App\Models\Status;
-use App\Models\technology;
 use Illuminate\Http\Request;
 use App\Imports\AccountsImport;
 use Illuminate\Support\Facades\DB;
