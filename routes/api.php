@@ -62,6 +62,8 @@ Route::group([
     'prefix' => 'technology'
 ], function ($router) {
     Route::get('/', [\App\Http\Controllers\TechnologyController::class, 'index']);
+    Route::post('/store', [\App\Http\Controllers\TechnologyController::class, 'store']);
+    Route::put('/update/{id}', [\App\Http\Controllers\TechnologyController::class, 'update']);
     Route::delete('/delete/{id}', [\App\Http\Controllers\TechnologyController::class, 'destroy']);
 });
 
@@ -70,6 +72,8 @@ Route::group([
     'prefix' => 'source'
 ], function ($router) {
     Route::get('/', [\App\Http\Controllers\SourceController::class, 'index']);
+    Route::post('/store', [\App\Http\Controllers\SourceController::class, 'store']);
+    Route::put('/update/{id}', [\App\Http\Controllers\SourceController::class, 'update']);
     Route::delete('/delete/{id}', [\App\Http\Controllers\SourceController::class, 'destroy']);
 });
 
@@ -78,6 +82,8 @@ Route::group([
     'prefix' => 'jobrank'
 ], function ($router) {
     Route::get('/', [\App\Http\Controllers\JobRankController::class, 'index']);
+    Route::post('/store', [\App\Http\Controllers\JobRankController::class, 'store']);
+    Route::put('/update/{id}', [\App\Http\Controllers\JobRankController::class, 'update']);
     Route::delete('/delete/{id}', [\App\Http\Controllers\JobRankController::class, 'destroy']);
 });
 
@@ -86,5 +92,7 @@ Route::group([
     'prefix' => 'status'
 ], function ($router) {
     Route::get('/', [\App\Http\Controllers\StatusController::class, 'index']);
+    Route::post('/store', [\App\Http\Controllers\StatusController::class, 'store']);
+    Route::put('/update/{id}', [\App\Http\Controllers\StatusController::class, 'update']);
     Route::delete('/delete/{id}', [\App\Http\Controllers\StatusController::class, 'destroy']);
 });
