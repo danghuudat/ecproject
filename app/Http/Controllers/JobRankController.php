@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
-use App\Models\JobRank;
+
+use App\Repositories\JobRank\Contracts\JobRankInterface;
 use Illuminate\Http\Request;
 
 class JobRankController extends Controller
@@ -13,62 +13,27 @@ class JobRankController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public $jobrankReponsitory;
+    public function __construct(JobRankInterface $jobrankReponsitory)
     {
-        $data = JobRank::find($id);
-        $result = $data->delete();
-        if ($result) {
-            return ["result" => "record has been delete"];
-        } else {
-            return ["result" => "failed"];
-        }
+        $this->jobrankReponsitory = $jobrankReponsitory;
     }
 
+    public function destroy($id)
+    {
+        return $this->jobrankReponsitory->destroy($id);
+    }
 
     public function index()
     {
-        $data = JobRank::all();
-        return response($data);
+        return response($this->jobrankReponsitory->index());
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function store(Request $request){
+        return response($this->jobrankReponsitory->store($request));
+    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\JobRank  $jobRange
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\JobRank  $jobRange
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\JobRank  $jobRange
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\JobRank  $jobRange
-     * @return \Illuminate\Http\Response
-     */
+    public function update(Request $request, $id){
+        return response($this->jobrankReponsitory->update($request, $id));
+    }
 }

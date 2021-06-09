@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JobRank;
-use App\Models\Source;
+use App\Repositories\Source\Contracts\SourceInterface;
 use Illuminate\Http\Request;
 
 class SourceController extends Controller
 {
-    public function destroy($id)
+    public $sourceReponsitory;
+    public function __construct(SourceInterface $sourceReponsitory)
     {
-        $data = Source::find($id);
-        $result = $data->delete();
-        if ($result) {
-            return ["result" => "record has been delete"];
-        } else {
-            return ["result" => "failed"];
-        }
+        $this->sourceReponsitory = $sourceReponsitory;
     }
 
+    public function destroy($id)
+    {
+        return $this->sourceReponsitory->destroy($id);
+    }
 
     public function index()
     {
-        $data = Source::all();
-        return response($data);
+        return response($this->sourceReponsitory->index());
+    }
+
+    public function store(Request $request){
+        return response($this->sourceReponsitory->store($request));
+    }
+
+    public function update(Request $request, $id){
+        return response($this->sourceReponsitory->update($request, $id));
     }
 }

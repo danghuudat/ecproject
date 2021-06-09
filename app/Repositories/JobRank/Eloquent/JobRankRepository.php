@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\Department\Eloquent;
+namespace App\Repositories\JobRank\Eloquent;
 
 use App\Models\Department;;
-use App\Repositories\JobRank\Contracts\DepartmentInterface;
+use App\Repositories\JobRank\Contracts\JobRankInterface;
 
 /**
  * Class DepartmentRepository.
  */
-class DepartmentRepository implements DepartmentInterface
+class JobRankRepository implements JobRankInterface
 {
     /**
      * @return string

@@ -2,8 +2,18 @@
 
 namespace App\Providers;
 
+use App\Repositories\Account\Contracts\AccountInterface;
+use App\Repositories\Account\Eloquent\AccountRepository;
 use App\Repositories\Department\Contracts\DepartmentInterface;
 use App\Repositories\Department\Eloquent\DepartmentRepository;
+use App\Repositories\JobRank\Contracts\JobRankInterface;
+use App\Repositories\JobRank\Eloquent\JobRankRepository;
+use App\Repositories\Source\Contracts\SourceInterface;
+use App\Repositories\Source\Eloquent\SourceRepository;
+use App\Repositories\Status\Contracts\StatusInterface;
+use App\Repositories\Status\Eloquent\StatusRepository;
+use App\Repositories\Technology\Contracts\TechnologyInterface;
+use App\Repositories\Technology\Eloquent\TechnologyRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -18,6 +28,26 @@ class RepositoryServiceProvider extends ServiceProvider
         'department' => [
             DepartmentInterface::class,
             DepartmentRepository::class,
+        ],
+        'account'=>[
+            AccountInterface::class,
+            AccountRepository::class
+        ],
+        'jobrank' => [
+            JobRankInterface::class,
+            JobRankRepository::class,
+        ],
+        'source'=>[
+            SourceInterface::class,
+            SourceRepository::class
+        ],
+        'status' => [
+            StatusInterface::class,
+            StatusRepository::class,
+        ],
+        'technology'=>[
+            TechnologyInterface::class,
+            TechnologyRepository::class
         ],
 
     ];

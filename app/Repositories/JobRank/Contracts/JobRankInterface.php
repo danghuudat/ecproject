@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Department\Contracts;
+namespace App\Repositories\JobRank\Contracts;
 
-interface DepartmentInterface
+interface JobRankInterface
 {
     public function index();
 

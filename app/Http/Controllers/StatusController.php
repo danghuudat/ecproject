@@ -4,25 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\JobRank;
 use App\Models\Status;
+use App\Repositories\JobRank\Contracts\JobRankInterface;
+use App\Repositories\Status\Contracts\StatusInterface;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
-    public function destroy($id)
+    public $statusReponsitory;
+    public function __construct(StatusInterface $statusReponsitory)
     {
-        $data = Status::find($id);
-        $result = $data->delete();
-        if ($result) {
-            return ["result" => "record has been delete"];
-        } else {
-            return ["result" => "failed"];
-        }
+        $this->statusReponsitory = $statusReponsitory;
     }
 
+    public function destroy($id)
+    {
+        return $this->statusReponsitory->destroy($id);
+    }
 
     public function index()
     {
-        $data = Status::all();
-        return response($data);
+        return response($this->statusReponsitory->index());
+    }
+
+    public function store(Request $request){
+        return response($this->statusReponsitory->store($request));
+    }
+
+    public function update(Request $request, $id){
+        return response($this->statusReponsitory->update($request, $id));
     }
 }

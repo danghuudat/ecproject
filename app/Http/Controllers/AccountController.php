@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\AccountsExport;
 use App\Models\Account;
+use App\Repositories\Account\Contracts\AccountInterface;
 use Illuminate\Http\Request;
 use App\Imports\AccountsImport;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,13 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AccountController extends Controller
 {
+    public $accountReponsitory;
+
+    public function __construct(AccountInterface $accountReponsitory)
+    {
+        $this->accountReponsitory = $accountReponsitory;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,10 +27,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $data = Account::query()
-            ->with(['previous', 'newbu', 'forecast_bu', 'source', 'technology', 'job_range', 'status'])
-            ->get();
-        return response($data);
+        $data = $this->accountReponsitory->index();
+        return $data;
     }
 
     /**
@@ -43,7 +49,8 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        return $this->store($request);
     }
 
     /**
@@ -52,9 +59,9 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function show(Account $account)
+    public function show($id)
     {
-        //
+        return response($this->accountReponsitory->show($id));
     }
 
     /**
@@ -75,9 +82,9 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Account $account)
+    public function update(Request $request, $id)
     {
-        //
+        return $this->accountReponsitory->update($request, $id);
     }
 
     /**
@@ -88,45 +95,27 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        $data = Account::find($id);
-        $result = $data->delete();
-        if ($result) {
-            return ["result" => "record has been delete"];
-        } else {
-            return ["result" => "failed"];
-        }
+        return $this->accountReponsitory->destroy($id);
     }
 
     public function import()
     {
-        Excel::import(new AccountsImport, storage_path('..\app\Imports/xlsx\account.xlsx'));
-        return redirect('/')->with('success', 'All good!');
+        return $this->accountReponsitory->export();
     }
 
     public function genchart()
     {
-        $datas = Account::groupBy('status_id','technology_id')
-            ->select('technology_id', 'status_id', DB::raw('count(id) as number_member'))
-            ->orderBy('status_id')
-            ->with('status')
-            ->with('technology')
-            ->get();
-        return response($datas);
+        return response($this->accountReponsitory->genchart());
     }
 
     public function genchartNewbu(){
-        $datas = Account::groupBy('newbu_id','technology_id')
-            ->select('technology_id', 'newbu_id', DB::raw('count(id) as number_member'))
-            ->whereNotNull('newbu_id')
-            ->orderBy('technology_id')
-            ->with('technology')
-            ->with('newbu')
-            ->get();
-        return response($datas);
+        return response($this->accountReponsitory->genchartNewbu());
     }
 
     public function export()
     {
-        return Excel::download(new AccountsExport, 'accounts.xlsx',);
+        return $this->accountReponsitory->export();
     }
+
+
 }

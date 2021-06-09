@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\Department\Eloquent;
+namespace App\Repositories\Technology\Eloquent;
 
-use App\Models\Department;;
-use App\Repositories\JobRank\Contracts\DepartmentInterface;
+use App\Models\Technology;
+use App\Repositories\Technology\Contracts\TechnologyInterface;
 
 /**
  * Class DepartmentRepository.
  */
-class DepartmentRepository implements DepartmentInterface
+class TechnologyRepository implements TechnologyInterface
 {
     /**
      * @return string
@@ -16,7 +16,7 @@ class DepartmentRepository implements DepartmentInterface
      */
 
     public function model(){
-        return Department::class;
+        return Technology::class;
     }
 
     public function index(){
@@ -36,7 +36,7 @@ class DepartmentRepository implements DepartmentInterface
     }
 
     public function store($request){
-        $data = new Department();
+        $data = new Technology();
         $data->name = $request->name;
         $data->save();
         return $data;

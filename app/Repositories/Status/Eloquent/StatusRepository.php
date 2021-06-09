@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Repositories\Department\Eloquent;
+namespace App\Repositories\Status\Eloquent;
 
 use App\Models\Department;;
-use App\Repositories\JobRank\Contracts\DepartmentInterface;
+
+use App\Models\Status;
+use App\Repositories\Status\Contracts\StatusInterface;
 
 /**
  * Class DepartmentRepository.
  */
-class DepartmentRepository implements DepartmentInterface
+class StatusRepository implements StatusInterface
 {
     /**
      * @return string
@@ -16,7 +18,7 @@ class DepartmentRepository implements DepartmentInterface
      */
 
     public function model(){
-        return Department::class;
+        return Status::class;
     }
 
     public function index(){
@@ -36,7 +38,7 @@ class DepartmentRepository implements DepartmentInterface
     }
 
     public function store($request){
-        $data = new Department();
+        $data = new Status();
         $data->name = $request->name;
         $data->save();
         return $data;

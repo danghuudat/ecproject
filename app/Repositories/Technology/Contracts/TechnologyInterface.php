@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Department\Contracts;
+namespace App\Repositories\Technology\Contracts;
 
-interface DepartmentInterface
+interface TechnologyInterface
 {
     public function index();
 

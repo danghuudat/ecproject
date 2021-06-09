@@ -52,6 +52,8 @@ Route::group([
     'prefix' => 'department'
 ], function ($router) {
     Route::get('/', [\App\Http\Controllers\DepartmentController::class, 'index']);
+    Route::post('/store', [\App\Http\Controllers\DepartmentController::class, 'store']);
+    Route::put('/update/{id}', [\App\Http\Controllers\DepartmentController::class, 'update']);
     Route::delete('/delete/{id}', [\App\Http\Controllers\DepartmentController::class, 'destroy']);
 });
 

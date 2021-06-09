@@ -2,27 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
-use App\Models\technology;
+use App\Models\Technology;
+use App\Repositories\Technology\Contracts\TechnologyInterface;
 use Illuminate\Http\Request;
 
 class TechnologyController extends Controller
 {
-    public function destroy($id)
+    public $technologyReponsitory;
+    public function __construct(TechnologyInterface $technologyReponsitory)
     {
-        $data = Technology::find($id);
-        $result = $data->delete();
-        if ($result) {
-            return ["result" => "record has been delete"];
-        } else {
-            return ["result" => "failed"];
-        }
+        $this->technologyReponsitory = $technologyReponsitory;
     }
 
+    public function destroy($id)
+    {
+        return $this->technologyReponsitory->destroy($id);
+    }
 
     public function index()
     {
-        $data = Technology::all();
-        return response($data);
+        return response($this->technologyReponsitory->index());
+    }
+
+    public function store(Request $request){
+        return response($this->technologyReponsitory->store($request));
+    }
+
+    public function update(Request $request, $id){
+        return response($this->technologyReponsitory->update($request, $id));
     }
 }

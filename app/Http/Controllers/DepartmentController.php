@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
-use App\Models\Department;
-use App\Repositories\Department\Contracts\DepartmentInterface;
-use App\Repositories\Department\Eloquent\DepartmentRepository;
+use App\Repositories\JobRank\Contracts\DepartmentInterface;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -18,19 +15,19 @@ class DepartmentController extends Controller
 
     public function destroy($id)
     {
-        $data = Department::find($id);
-        $result = $data->delete();
-        if ($result) {
-            return ["result" => "record has been delete"];
-        } else {
-            return ["result" => "failed"];
-        }
+        return $this->departmentReponsitory->destroy($id);
     }
-
 
     public function index()
     {
-        $data = $this->departmentReponsitory->index();
-        return response($data);
+        return response($this->departmentReponsitory->index());
+    }
+
+    public function store(Request $request){
+        return response($this->departmentReponsitory->store($request));
+    }
+
+    public function update(Request $request, $id){
+        return response($this->departmentReponsitory->update($request, $id));
     }
 }
