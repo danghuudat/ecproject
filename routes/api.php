@@ -40,6 +40,7 @@ Route::group([
 ], function ($router) {
     Route::get('/import', [\App\Http\Controllers\AccountController::class, 'import']);
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index']);
+    Route::post('/store', [\App\Http\Controllers\AccountController::class, 'store']);
     Route::get('/genchart', [\App\Http\Controllers\AccountController::class, 'genchart']);
     Route::get('/genchartnewbu', [\App\Http\Controllers\AccountController::class, 'genchartNewbu']);
     Route::delete('/delete/{id}', [\App\Http\Controllers\AccountController::class, 'destroy']);

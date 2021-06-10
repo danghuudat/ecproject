@@ -2,7 +2,7 @@
 
 namespace App\Repositories\JobRank\Eloquent;
 
-use App\Models\Department;;
+use App\Models\JobRank;
 use App\Repositories\JobRank\Contracts\JobRankInterface;
 
 /**
@@ -16,7 +16,7 @@ class JobRankRepository implements JobRankInterface
      */
 
     public function model(){
-        return Department::class;
+        return JobRank::class;
     }
 
     public function index(){
@@ -36,7 +36,7 @@ class JobRankRepository implements JobRankInterface
     }
 
     public function store($request){
-        $data = new Department();
+        $data = new JobRank();
         $data->name = $request->name;
         $data->save();
         return $data;

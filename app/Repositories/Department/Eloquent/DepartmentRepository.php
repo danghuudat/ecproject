@@ -3,7 +3,7 @@
 namespace App\Repositories\Department\Eloquent;
 
 use App\Models\Department;;
-use App\Repositories\JobRank\Contracts\DepartmentInterface;
+use App\Repositories\Department\Contracts\DepartmentInterface;
 
 /**
  * Class DepartmentRepository.

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\JobRank\Contracts\DepartmentInterface;
+use App\Repositories\Department\Contracts\DepartmentInterface;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
