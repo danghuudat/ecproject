@@ -42,6 +42,7 @@ Route::group([
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index']);
     Route::post('/store', [\App\Http\Controllers\AccountController::class, 'store']);
     Route::get('/genchart', [\App\Http\Controllers\AccountController::class, 'genchart']);
+    Route::put('/update/{id}', [\App\Http\Controllers\AccountController::class, 'update']);
     Route::get('/genchartnewbu', [\App\Http\Controllers\AccountController::class, 'genchartNewbu']);
     Route::delete('/delete/{id}', [\App\Http\Controllers\AccountController::class, 'destroy']);
     Route::get('/export/', [\App\Http\Controllers\AccountController::class, 'export']);
