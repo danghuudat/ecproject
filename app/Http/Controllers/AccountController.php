@@ -49,8 +49,8 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-
-        return $this->store($request);
+        \Log::info("123123");
+        return $this->accountReponsitory->store($request);
     }
 
     /**
